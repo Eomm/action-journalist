@@ -11,9 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-
     - run: npm ci
-    - run: npm test
+    # - run: npm test
     - uses: ./
       with:
-        milliseconds: 1000
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        command: npm run test-command
