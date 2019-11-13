@@ -6,6 +6,7 @@
   "scripts": {
     "lint": "standard",
     "lint:fix": "standard --fix",
+    "test-command": "echo 'hello world'",
     "package": "ncc build index.js -o dist",
     "test": "npm run lint && jest"
   },
