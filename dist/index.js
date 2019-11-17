@@ -1115,14 +1115,8 @@ async function run () {
 
     const options = {
       listeners: {
-        stdout: (data) => {
-          myOutput += data.toString();
-        },
-        stderr: (data) => {
-          myError += data.toString();
-        }
-        // stdline: data => { myOutput += data },
-        // errline: data => { myError += data }
+        stdline: data => { myOutput += data },
+        errline: data => { myError += data }
       }
     }
 
@@ -1137,14 +1131,14 @@ async function run () {
     }
 
     core.debug(`Running command ${command}`)
-    await exec.exec(command, options)
+    await exec.exec(command, [], options)
     core.debug('Command executed')
 
     const postDest = {
       owner: process.env.GITHUB_ACTOR,
       repo: repository.name,
       issue_number: pullRequest.number,
-      body: `StdOut:\n${myOutput}\n\n\nStdErr:\n${myError}`
+      body: `StdOut:\n\`\`\`${myOutput}\`\`\`\n\n\nStdErr:\n\`\`\`${myError}\`\`\``
     }
     core.debug('Creating comment in issue: ' + JSON.stringify(postDest))
     const octokit = new github.GitHub(githubToken)
