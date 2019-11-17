@@ -36,7 +36,11 @@ async function run () {
     await exec.exec(command, options)
     core.debug('Command executed')
 
-    core.debug('Creating comment in issue XXX')
+    core.debug('Creating comment in issue: ', {
+      owner: process.env.GITHUB_ACTOR,
+      repo: process.env.GITHUB_REPOSITORY,
+      issue_number: pullRequest.number
+    })
     const octokit = new github.GitHub(githubToken)
     await octokit.issues.createComment({
       owner: process.env.GITHUB_ACTOR,
