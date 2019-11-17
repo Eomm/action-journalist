@@ -26,7 +26,7 @@ async function run () {
     // pull_request_review_comment
     const event = require(process.env.GITHUB_EVENT_PATH)
 
-    const { comment, pull_request: pullRequest } = event
+    const { comment, pull_request: pullRequest, repository } = event
     if (!filterKeywords.some(_ => comment.body.includes(_))) {
       core.warning(`Ignoring comment ${comment.body}`)
       return
@@ -38,7 +38,7 @@ async function run () {
 
     const postDest = {
       owner: process.env.GITHUB_ACTOR,
-      repo: process.env.GITHUB_REPOSITORY,
+      repo: repository.name,
       issue_number: pullRequest.number,
       body: `StdOut:\n${myOutput}\n\n\nStdErr:\n${myError}`
     }
