@@ -28,7 +28,7 @@ async function run () {
 
     const { comment, pull_request: pullRequest } = event
     if (!filterKeywords.some(_ => comment.body.includes(_))) {
-      core.warn(`Ignoring comment ${comment.body}`)
+      core.warning(`Ignoring comment ${comment.body}`)
       return
     }
 
@@ -36,14 +36,15 @@ async function run () {
     await exec.exec(command, options)
     core.debug('Command executed')
 
-    core.debug('Creating comment in issue XXX')
-    const octokit = new github.GitHub(githubToken)
-    await octokit.issues.createComment({
+    const postDest = {
       owner: process.env.GITHUB_ACTOR,
       repo: process.env.GITHUB_REPOSITORY,
       issue_number: pullRequest.number,
       body: `StdOut:\n${myOutput}\n\n\nStdErr:\n${myError}`
-    })
+    }
+    core.debug('Creating comment in issue: ' + JSON.stringify(postDest))
+    const octokit = new github.GitHub(githubToken)
+    await octokit.issues.createComment(postDest)
   } catch (error) {
     core.setFailed(error.message)
   }
