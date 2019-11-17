@@ -1115,8 +1115,14 @@ async function run () {
 
     const options = {
       listeners: {
-        stdline: data => { myOutput += data },
-        errline: data => { myError += data }
+        stdout: (data) => {
+          myOutput += data.toString();
+        },
+        stderr: (data) => {
+          myError += data.toString();
+        }
+        // stdline: data => { myOutput += data },
+        // errline: data => { myError += data }
       }
     }
 
