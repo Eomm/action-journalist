@@ -1,14 +1,24 @@
-name: 'Journalist'
-description: 'Run a command and post the output in the issue'
+name: Journalist
+description: Run a command and post the output in the issue
+branding:
+  color: purple
+  icon: play-circle
 inputs:
   github-token:
-    description: 'the github token'
+    description: the GitHub token
+    default: ${{ github.token }}
     required: true
   command:
-    description: 'the command line to execute'
+    description: the command line to execute
     required: true
   keywords:
-    description: 'list of keywords when trigger the command'
+    description: JSON stringified list of keywords when trigger the command
+    required: true
+outputs:
+  stdout:
+    description: the raw stdout string of the command
+  stderr:
+    description: the raw stderr string of the command
 runs:
-  using: 'node12'
-  main: 'dist/index.js'
+  using: node12
+  main: dist/index.js

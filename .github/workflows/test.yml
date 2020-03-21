@@ -1,7 +1,7 @@
 name: "test-local"
 on:
-  pull_request_review_comment:
-    types: [created, deleted]
+  issue_comment:
+    types: [created]
 
 jobs:
   test:
@@ -9,9 +9,9 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - run: npm ci
-    # - run: npm test
     - name: execute command
       uses: ./
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        command: npm run test-command
+        keywords: '["#journalist run"]'
+        command: echo 'hello world'

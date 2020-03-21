@@ -4,11 +4,10 @@
   "description": "Run a command line and post the output in the issue",
   "main": "index.js",
   "scripts": {
-    "lint": "standard",
-    "lint:fix": "standard --fix",
-    "test-command": "echo 'hello world'",
+    "lint": "standard ./*.js",
+    "lint:fix": "standard ./*.js --fix",
     "package": "ncc build index.js -o dist",
-    "test": "npm run lint && jest"
+    "test": "npm run lint"
   },
   "repository": {
     "type": "git",
@@ -19,7 +18,7 @@
     "Actions",
     "JavaScript"
   ],
-  "author": "GitHub",
+  "author": "Manuel Spigolon <behemoth89@gmail.com> (https://github.com/Eomm)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Eomm/action-journalist/issues"
@@ -31,8 +30,7 @@
     "@actions/github": "^1.1.0"
   },
   "devDependencies": {
-    "@zeit/ncc": "^0.20.5",
-    "jest": "^24.9.0",
+    "@zeit/ncc": "^0.21.1",
     "standard": "^14.3.1"
   }
 }
