@@ -1,4 +1,4 @@
-name: Journalist
+name: Eomm/action-journalist
 description: Run a command and post the output in the issue
 branding:
   color: purple
