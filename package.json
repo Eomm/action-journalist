@@ -1,6 +1,6 @@
 {
   "name": "action-journalist",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Run a command line and post the output in the issue",
   "main": "index.js",
   "scripts": {
